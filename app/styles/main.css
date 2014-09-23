@@ -34,6 +34,14 @@ body {
   margin-left:5px;
 }
 
+.post-pic {
+  margin: -2px 5px 0 0;
+  max-height: 50px;
+  -webkit-border-radius: 100px;
+  -moz-border-radius: 100px;
+  border-radius: 100px;
+}
+
 
 /* PROFILE PAGE */
 .prof-img{
