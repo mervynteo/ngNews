@@ -34,6 +34,22 @@
   </div>
   <!-- Comments Tab -->
   <div class="container posts-page tab-pane" id="comments">
-    
+    <div class="container posts-page tab-pane" id="comments">
+      <div class="post row" ng-repeat="(commentId, comment) in comments">
+        <div class="col-xs-1">
+
+        </div>
+        <div class="col-md-9 col-xs-11">
+          <div class="info">
+            <a href="{{ commentedPosts[commentId].url }}">{{ commentedPosts[commentId].title }}</a>
+            <span class="url">({{ commentedPosts[commentId].url | hostnameFromUrl }})</span>
+          </div>
+
+          <a href="#/posts/{{ commentedPosts[commentId].$id }}">comments</a>
+          <p>{{ comment.text }}</p>
+        </div>
+        <div class="col-md-2">
+        </div>
+      </div>
   </div>
 </div>

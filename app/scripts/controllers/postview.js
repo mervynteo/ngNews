@@ -1,6 +1,6 @@
 'use strict';
 
-app.controller('PostViewCtrl', function($scope, $routeParams, Post) {
+app.controller('PostViewCtrl', function($scope, $routeParams, Post, User) {
 	$scope.post = Post.find($routeParams.postId);
 
 	$scope.comments = Post.comments($routeParams.postId).$asArray();

@@ -44,7 +44,10 @@ app.factory('Post', function($firebase, FIREBASE_URL, User) {
         var user = User.getCurrent();
         comment.username = user.username;
         
-        Post.comments(postId).$push(comment);
+        Post.comments(postId).$push(comment).then(function(ref) {
+          var commentId = ref.name();
+          User.comments(user.username).$set(commentId, postId);
+        });
       }
     },
     deleteComment: function(postId, comment) {
