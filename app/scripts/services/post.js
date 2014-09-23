@@ -11,6 +11,7 @@ app.factory('Post', function($firebase, FIREBASE_URL, User) {
         var user = User.getCurrent();
 
         post.owner = user.username;
+        post.md5_hash = user.md5_hash;
 
         return posts.$add(post).then(function(ref) {
           var postId = ref.name();
