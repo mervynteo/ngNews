@@ -2,7 +2,10 @@
 
 app.controller('PostsCtrl', function($scope, Post, $location) {		
 	
-	$scope.posts = Post.all;
+	if($location.path() === '/') {
+		$scope.posts = Post.all;	
+	}
+	
 	$scope.post = {url: 'http://'};	
 
 	$scope.deletePost = function(post) {

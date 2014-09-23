@@ -35,6 +35,27 @@ app.factory('Post', function($firebase, FIREBASE_URL, User) {
           });
         }
       }      
+    },
+    comments: function(postId) {
+      return $firebase(new Firebase(FIREBASE_URL + 'comments/' + postId));
+    },
+    addComment: function(postId, comment) {
+      if(User.signedIn()) {
+        var user = User.getCurrent();
+        comment.username = user.username;
+        
+        Post.comments(postId).$push(comment);
+      }
+    },
+    deleteComment: function(postId, comment) {
+      if(User.signedIn()) {
+        var user = User.getCurrent();
+        var commentId = comment.$id;
+
+        Post.comments(postId).$remove(commentId).then(function() {
+          User.comments(user.username).$remove(commentId);
+        });
+      }
     }
   };
 

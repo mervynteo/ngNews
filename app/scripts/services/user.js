@@ -40,6 +40,21 @@ app.factory('User', function($firebase, FIREBASE_URL, $rootScope) {
 		},
 		posts: function(username) {
 			return $firebase(new Firebase(FIREBASE_URL + 'user_posts/' + username));
+		},
+		comments: function(username) {
+			return $firebase(new Firebase(FIREBASE_URL + 'user_comments/' + username));
+		},
+		addComment: function(postId, comment) {
+			if(User.signedIn()) {
+				var user = User.getCurrent();
+				comment.username = user.username;
+
+				Post.comments(postId).$push(comment).then(function(ref) {
+					var commentId = ref.name();
+					User.comments(user.username).$set(commentId, postId);
+				});
+
+			}
 		}
 	};
 
