@@ -9,7 +9,8 @@ app.directive('checkUsername', function(User) {
       ctrl.$parsers.push(function(viewValue) {
         if (usernameRegexp.test(viewValue)) {
           User.findByUsername(viewValue).$loaded(function (user){
-            if (user.$value === null){
+            
+            if (user.$value === null){              
               ctrl.$setValidity('taken', true);
               ctrl.$setValidity('invalid', true);
             } else {
@@ -17,14 +18,12 @@ app.directive('checkUsername', function(User) {
               ctrl.$setValidity('invalid', true);
             }
           });
-
-          console.log(viewValue);
+          
           return viewValue;
-        } else {
+        } else {          
           ctrl.$setValidity('taken', true);
           ctrl.$setValidity('invalid', false);
-          
-          console.log(viewValue);
+                    
           return viewValue;
         }
       });
